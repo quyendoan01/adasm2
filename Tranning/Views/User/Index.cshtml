@@ -1,0 +1,161 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model Tranning.Models.UserModel
+
+@{
+    ViewData["Title"] = "User page";
+    // co the code nhu trong controller
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    bool statusAdd = Convert.ToBoolean(TempData["saveStatus"]);
+    bool statusUpdate = Convert.ToBoolean(TempData["UpdateStatus"]);
+}
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h4 class="display-6">
+            List User
+        </h4>
+        <a class="btn btn-primary btn-sm" href="@Url.Action("Add","User")"> Add User </a>
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p class="mb-0">
+                    Find by name : <input class="border border-primary rounded" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <button type="submit" class="btn btn-primary btn-sm mb-0">Search</button>
+                    <a asp-action="Index"> Back to full list</a>
+                </p>
+            </div>
+        </form>
+        <hr />
+
+        @if (TempData["UpdateStatus"] != null)
+        {
+            @if (statusUpdate)
+            {
+                <div class="text-success my-2">@TempData["UpdateStatus"] Update Successfully</div>
+            }
+            else
+            {
+                <div class="text-danger my-2"> Update Failure</div>
+            }
+        }
+
+        @if (TempData["saveStatus"] != null)
+        {
+            @if (statusAdd)
+            {
+                <div class="text-success my-2"> Add Successfully</div>
+            }
+            else
+            {
+                <div class="text-danger my-2">@TempData["UpdateStatus"] Add Failure</div>
+            }
+        }
+
+        <table class="table-responsive table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ROLE</th>
+                    <th>EXTRA CODE</th>
+                    <th>USERNAME</th>
+                    <th>PASSWORD</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>ADDRESS</th>
+                    <th>GENDER</th>
+                    <th>BIRTHDAY</th>
+                    <th>AVATAR</th>
+                    <th>LAST LOGIN</th>
+                    <th>LAST LOGOUT</th>
+                    <th>STATUS</th>
+                    <th>CREATED AT</th>
+                    <th>UPDATED AT</th>
+                    <th>FULL NAME</th>
+                    <th>EDUCATION</th>
+                    <th>PROGRAMMING LANGUAGE</th>
+                    <th>TOEIC SCORE</th>
+                    <th>EXPERIENCE</th>
+                    <th>DEPARTMENT</th>
+                    <th colspan="2" width="5%">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UserDetailLists)
+                {
+                    <tr class="tr three-row">
+                        <td>@item.id</td>
+                        @if (item.role_id == 0)
+                        {
+                            <td>Admin</td>
+
+                        }
+                        else if (item.role_id == 1)
+                        {
+                            <td>Training staff</td>
+
+                        }
+                        else if (item.role_id == 2)
+                        {
+                            <td>Trainer</td>
+
+                        }
+                        else if (item.role_id == 3)
+                            {
+                            <td>Trainee</td>
+                            }
+                        <td>@item.extra_code</td>
+                        <td>@item.username</td>
+                        <td>@item.password</td>
+                        <td>@item.email</td>
+                        <td>@item.phone</td>
+                        <td>@item.address</td>
+                        <td>@item.gender</td>
+                        <td>@item.birthday</td>
+                        <td>@item.avatar</td>
+                        <td>@item.last_login</td>
+                        <td>@item.last_logout</td>
+                        <td>@item.status</td>
+                        <td>@item.created_at</td>
+                        <td>@item.updated_at</td>
+                        <td>@item.full_name</td>
+                        <td>@item.education</td>
+                        <td>@item.programming_laguague</td>
+                        <td>@item.toeic_score</td>
+                        <td>@item.experience</td>
+                        <td>@item.department</td>
+                        <td>
+                            @if (item.role_id == 0 && HttpContextAccessor.HttpContext.Session.GetString("SessionRoleID") == "1")
+                            {
+
+                            }
+                            else
+                            {
+                                <a class="btn btn-info btn-sm" href="@Url.Action("Update","User", new { id = @item.id })">Edit</a>
+                            }
+                        </td>
+                        <td>
+                            @if (item.role_id == 0)
+                            {
+                                
+                            }
+                            else if (item.role_id == 3)
+                            {
+                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","User", new { id = @item.id })">Delete</a>
+                            }
+                            else if (item.role_id == 2)
+                            {
+                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","User", new { id = @item.id })">Delete</a>
+                            }
+                            else if (item.role_id == 1 && HttpContextAccessor.HttpContext.Session.GetString("SessionRoleID") == "0")
+                            {
+                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","User", new { id = @item.id })">Delete</a>
+                            } 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

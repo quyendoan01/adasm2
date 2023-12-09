@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Tranning.Models.CourseModel
+
+@{
+    ViewData["Title"] = "Course page";
+    // co the code nhu trong controller
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    bool statusAdd = Convert.ToBoolean(TempData["saveStatus"]);
+    bool statusUpdate = Convert.ToBoolean(TempData["UpdateStatus"]);
+}
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h4 class="display-6">
+            List Courses
+        </h4>
+        <a class="btn btn-primary btn-sm" href="@Url.Action("Add","Course")"> Add Course </a>
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p class="mb-0">
+                    Find by name : <input class="border border-primary rounded" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <button type="submit" class="btn btn-primary btn-sm mb-0">Search</button>
+                    <a asp-action="Index"> Back to full list</a>
+                </p>
+            </div>
+        </form>
+        <hr />
+
+        @if (TempData["UpdateStatus"] != null)
+        {
+            @if (statusUpdate)
+            {
+                <div class="text-success my-2"> Update Successfully</div>
+            }
+            else
+            {
+                <div class="text-danger my-2"> Update Failure</div>
+            }
+        }
+
+        @if (TempData["saveStatus"] != null)
+        {
+            @if (statusAdd)
+            {
+                <div class="text-success my-2"> Add Successfully</div>
+            }
+            else
+            {
+                <div class="text-danger my-2"> Add Failure</div>
+            }
+        }
+
+        <table class="table-responsive table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CATEGORY</th>
+                    <th>NAME</th>
+                    <th>DESCRIPTION</th>
+                    <th>START DATE</th>
+                    <th>END DATE</th>
+                    <th>VOTE</th>
+                    <th>AVATAR</th>
+                    <th>STATUS</th>
+                    <th>CREATED AT</th>
+                    <th>UPDATED AT</th>
+                    <th colspan="2" width="5%">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CourseDetailLists)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.category_name</td>
+                        <td>@item.name</td>
+                        <td>@item.description</td>
+                        <td>@(DateOnly.FromDateTime(item.start_date))</td>
+                        <td>@(item.end_date.HasValue ? DateOnly.FromDateTime(item.end_date.Value) : null)</td>
+                        <td>@(item.vote == null ? 0: item.vote)</td>
+                        <td>
+                            <img class="img-fluid" src="/Uploads/images/@item.avatar" />
+                        </td>
+
+                        <td>@item.status</td>
+                        <td>@item.created_at</td>
+                        <td>@item.updated_at</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="@Url.Action("Update","Course", new { id = @item.id })">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","Course", new { id = @item.id })">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
