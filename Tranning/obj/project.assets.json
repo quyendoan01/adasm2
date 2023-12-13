@@ -11623,11 +11623,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\AppDev\\ASP-MVC-NET7\\Tranning\\Tranning.csproj",
+      "projectUniqueName": "D:\\Study\\AppDev\\adasm2\\Tranning\\Tranning.csproj",
       "projectName": "Tranning",
-      "projectPath": "D:\\Study\\AppDev\\ASP-MVC-NET7\\Tranning\\Tranning.csproj",
+      "projectPath": "D:\\Study\\AppDev\\adasm2\\Tranning\\Tranning.csproj",
       "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "D:\\Study\\AppDev\\ASP-MVC-NET7\\Tranning\\obj\\",
+      "outputPath": "D:\\Study\\AppDev\\adasm2\\Tranning\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

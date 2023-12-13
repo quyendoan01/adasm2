@@ -64,12 +64,13 @@ namespace Tranning.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(TopicDetail topic, IFormFile documentsFile, IFormFile attach_fileFile)
+        public async Task<IActionResult> Add(TopicDetail topic, IFormFile videoFile, IFormFile documentsFile, IFormFile attach_fileFile)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    string uniqueFileNameVideo = UploadFile(videoFile);
                     string uniqueFileNameDocument = UploadFile(documentsFile);
                     string uniqueFileNameFile = UploadFile(attach_fileFile);
                     var topicData = new Topic()
@@ -77,7 +78,7 @@ namespace Tranning.Controllers
                         name = topic.name,
                         course_id = topic.course_id,
                         description = topic.description,
-                        videos = topic.videos,
+                        videos = uniqueFileNameVideo,
                         documents = uniqueFileNameDocument,
                         attach_file = uniqueFileNameFile,
                         status = topic.status,

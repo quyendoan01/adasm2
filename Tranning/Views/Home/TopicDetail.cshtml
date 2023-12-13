@@ -14,12 +14,34 @@
         <h4 class="display-6">
             @Model.name
             </h4>
+        <a style="float: right" class="btn btn-secondary" href="@Url.Action("CourseDetail","Home", new { id = Model.course_id })">Back</a>
          <p>@Model.description</p>
          </br>
-        <p>Video:<u><a class="text-primary">Click to download</a> </u></p>
+            @if (!string.IsNullOrEmpty(Model.videos))
+            {
+            <p>
+                Video:
 
-        <p>Document: <u><a class="text-primary">Click to download</a> </u></p>
+                <u><a class="text-primary" href="~/uploads/file/@Model.videos">Click to download</a> </u>
+            </p>
 
-        <p>File:<u><a class="text-primary">Click to download</a>  </u></p>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.documents))
+            {
+            <p>
+                Document:
+                <u><a class="text-primary" href="~/uploads/file/@Model.documents">Click to download</a> </u>
+
+            </p>
+        }
+
+            @if (!string.IsNullOrEmpty(Model.attach_file))
+            {
+        <p>File:
+                <u><a class="text-primary" href="~/uploads/file/@Model.attach_file">Click to download</a> </u>
+
+               </p>
+            }
 </div>
 </div>

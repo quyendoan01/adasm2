@@ -26,7 +26,7 @@
                           </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label asp-for="course_id">Trainee</label>
+                                <label asp-for="course_id">Course</label>
                                 <select asp-for="course_id" class="form-control" asp-items="@(new SelectList(ViewBag.Stores, "Value", "Text"))">
                                 </select>
                                 <span class="text-danger" asp-validation-for="course_id"></span>

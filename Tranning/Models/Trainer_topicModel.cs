@@ -8,10 +8,10 @@ namespace Tranning.Models
 {
     public class Trainer_topicModel
     {
-        public List<Trainer_topicDetail> Trainer_topicDetailLists { get; set; }
+        public List<Trainer_topicModelDetail> Trainer_topicDetailLists { get; set; }
     }
 
-    public class Trainer_topicDetail
+    public class Trainer_topicModelDetail
         {
             public int id { get; set; }
 

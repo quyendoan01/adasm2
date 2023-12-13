@@ -37,7 +37,7 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label asp-for="videos" class="control-label">Videos</label>
-                                <input asp-for="videos" class="form-control" />
+                                <input type="file" class="form-control" asp-for="videos" />
                                 <span class="text-danger" asp-validation-for="videos"></span>
                             </div>
                             <div class="form-group">
