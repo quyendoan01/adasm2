@@ -39,6 +39,9 @@
                                 <label asp-for="videos" class="control-label">Videos</label>
                                 <input asp-for="videos" class="form-control" />
                                 <span class="text-danger" asp-validation-for="videos"></span>
+                                <video controls>
+                                    <source src="~/uploads/file/@Model.videos" />
+                                </video>
                             </div>
                             <div class="form-group">
                                 <label asp-for="documentsFile" class="control-label">Documents</label>

@@ -40,6 +40,12 @@
                                 <span class="text-danger" asp-validation-for="username"></span>
                             </div>
                             <div class="form-group">
+                                <label asp-for="password">password</label>
+                                <input asp-for="password" class="form-control" />
+
+                                <span class="text-danger" asp-validation-for="password"></span>
+                            </div>
+                            <div class="form-group">
                                 <label asp-for="email">email</label>
                                 <input asp-for="email" class="form-control" />
 
@@ -56,12 +62,6 @@
                                 <input asp-for="address" class="form-control" />
 
                                 <span class="text-danger" asp-validation-for="address"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="gender">gender</label>
-                                <input asp-for="gender" class="form-control" />
-
-                                <span class="text-danger" asp-validation-for="gender"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="gender" class="control-label"></label>

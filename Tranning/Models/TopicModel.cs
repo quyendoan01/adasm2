@@ -27,6 +27,10 @@ namespace Tranning.Models
 
         public string? attach_file { get; set; }
 
+        [AllowedExtensionFile(new string[] { ".mp4" })]
+        [AllowedSizeFile(30 * 1024 * 1024)]
+        public IFormFile? videoFile { get; set; }
+
         [AllowedExtensionFile(new string[] { ".doc", ".docx", ".pdf" })]
         [AllowedSizeFile(30 * 1024 * 1024)]
         public IFormFile? documentsFile { get; set; }

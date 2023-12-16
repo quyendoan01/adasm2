@@ -76,9 +76,15 @@
                         <td>@item.course_name</td>
                         <td>@item.name</td>
                         <td>@item.description</td>
-                        <td class="td">@item.videos</td>
-                        <td class="td">@item.documents</td>
-                        <td class="td">@item.attach_file</td>
+                        <td class="td">
+                        @if (!string.IsNullOrEmpty(@item.videos))
+                        {
+                            <a href="~/uploads/file/@item.videos">Download</a>
+
+                        }
+                        </td>
+                        <td class="td"><a href="~/uploads/file/@item.documents">Download</a></td>
+                        <td class="td"><a href="~/uploads/file/@item.attach_file">Download</a></td>
                         <td>@item.status</td>
                         <td>@item.created_at</td>
                         <td>@item.updated_at</td>

@@ -11,7 +11,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".AdventureWorks.Session";
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromSeconds(36000);
     //options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.IdentityModel.Tokens;
 using Tranning.DataDBContext;
 using Tranning.Models;
 
@@ -64,22 +65,34 @@ namespace Tranning.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(TopicDetail topic, IFormFile videoFile, IFormFile documentsFile, IFormFile attach_fileFile)
+        public async Task<IActionResult> Add(TopicDetail topic, IFormFile? videoFile, IFormFile? documentsFile, IFormFile? attach_fileFile)
         {
             if (ModelState.IsValid)
             {
+                var uniqueFileNameVideo = "";
+                var uniqueFileNameDc = "";
+                var uniqueFileNameFile = "";
                 try
                 {
-                    string uniqueFileNameVideo = UploadFile(videoFile);
-                    string uniqueFileNameDocument = UploadFile(documentsFile);
-                    string uniqueFileNameFile = UploadFile(attach_fileFile);
+                    if (topic.videoFile != null)
+                    {
+                        uniqueFileNameVideo = UploadFile(topic.videoFile);
+                    }
+                    if (topic.documentsFile != null)
+                    {
+                        uniqueFileNameDc = UploadFile(topic.documentsFile);
+                    }
+                    if (topic.attach_fileFile != null)
+                    {
+                        uniqueFileNameFile = UploadFile(topic.attach_fileFile);
+                    }
                     var topicData = new Topic()
                     {
                         name = topic.name,
                         course_id = topic.course_id,
                         description = topic.description,
                         videos = uniqueFileNameVideo,
-                        documents = uniqueFileNameDocument,
+                        documents = uniqueFileNameDc,
                         attach_file = uniqueFileNameFile,
                         status = topic.status,
                         created_at = DateTime.Now,

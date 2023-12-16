@@ -20,10 +20,10 @@ namespace Tranning.Controllers
         [HttpGet]
         public IActionResult Index(string SearchString)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionUsername")))
-            {
-                return RedirectToAction(nameof(LoginController.Index), "Login");
-            }
+            //if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionUsername")))
+            //{
+            //    return RedirectToAction(nameof(LoginController.Index), "Login");
+            //}
 
             CategoryModel categoryModel = new CategoryModel();
             categoryModel.CategoryDetailLists = new List<CategoryDetail>();

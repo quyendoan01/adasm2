@@ -22,10 +22,10 @@ namespace Tranning.Controllers
         [HttpGet]
         public IActionResult Index(string SearchString)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionUsername")))
-            {
-                return RedirectToAction(nameof(LoginController.Index), "Login");
-            }
+            //if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionUsername")))
+            //{
+            //    return RedirectToAction(nameof(LoginController.Index), "Login");
+            //}
             UserModel userModel = new UserModel();
             userModel.UserDetailLists = new List<UserDetail>();
 
@@ -128,6 +128,7 @@ namespace Tranning.Controllers
 
             if (data != null)
             {
+                user.id = data.id;
                 user.role_id = data.role_id;
                 user.extra_code = data.extra_code;
                 user.username = data.username;
@@ -138,8 +139,6 @@ namespace Tranning.Controllers
                 user.gender = data.gender;
                 user.birthday = data.birthday;
                 user.avatar = data.avatar;
-                user.last_login = data.last_login;
-                user.last_logout = data.last_logout;
                 user.status = data.status;
                 user.full_name = data.full_name;
                 user.education = data.education;
@@ -156,7 +155,6 @@ namespace Tranning.Controllers
         {
             try
             {
-
                 var data = _dbContext.Users.Where(m => m.id == user.id).FirstOrDefault();
                 if (data != null)
                 {
