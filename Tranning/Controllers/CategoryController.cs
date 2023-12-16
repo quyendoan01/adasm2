@@ -69,13 +69,17 @@ namespace Tranning.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(CategoryDetail category, IFormFile Photo)
+        public async Task<IActionResult> Add(CategoryDetail category)
         {
             if (ModelState.IsValid)
             {
+                var uniqueFileName = "";
                 try
                 {
-                    string uniqueFileName = UploadFile(Photo);
+                    if (category.Photo != null)
+                    {
+                        uniqueFileName = UploadFile(category.Photo);
+                    }
                     var categoryData = new Category()
                     {
                         name = category.name,
